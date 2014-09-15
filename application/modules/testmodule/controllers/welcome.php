@@ -20,7 +20,37 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('welcome_message');
+		
 	}
+  public function install() {
+    $this->load->library('migration');
+    
+    //$this->migration->migrate_all_modules();
+    $module_name = 'testmodule';
+    $module_version = 1;
+    if ($this->migration->init_module($module_name))
+    $this->migration->current();
+
+    if ($this->migration->init_module($module_name))
+    $this->migration->version($module_version);
+    
+    echo "testmodule installation done";
+    }
+     public function uninstall() {
+    $this->load->library('migration');
+    
+    //$this->migration->migrate_all_modules();
+    $module_name = 'testmodule';
+    $module_version = 0;
+    if ($this->migration->init_module($module_name))
+    $this->migration->current();
+
+    if ($this->migration->init_module($module_name))
+    $this->migration->version($module_version);
+    
+    echo "testmodule untinstalled";
+    }
+	
 }
 
 /* End of file welcome.php */
